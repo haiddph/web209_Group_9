@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import RouterCategories from "./routes/category";
+import RouterProducts from "./routes/product";
 
 // Config
 dotenv.config();
@@ -15,13 +16,14 @@ app.use(cors());
 app.use(morgan("tiny"));
 // connect
 app.use("/api", RouterCategories);
+app.use("/api", RouterProducts);
 mongoose
-  .connect("mongodb://127.0.0.1:27017/nodejs-React")
-  .then(() => {
-    console.log("DB is connected");
-  })
-  .catch(() => {
-    console.log("Error connecting");
-  });
+    .connect("mongodb://127.0.0.1:27017/nodejs-React")
+    .then(() => {
+        console.log("DB is connected");
+    })
+    .catch(() => {
+        console.log("Error connecting");
+    });
 
 export const viteNodeApp = app;
