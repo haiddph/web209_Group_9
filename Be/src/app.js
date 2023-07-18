@@ -4,9 +4,12 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import RouterCategories from "./routes/category";
+import authRouter from './routes/auth';
+
 
 // Config
 dotenv.config();
+
 const app = express();
 
 // Middleware
@@ -15,6 +18,8 @@ app.use(cors());
 app.use(morgan("tiny"));
 // connect
 app.use("/api", RouterCategories);
+app.use("/api", authRouter);
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/nodejs-React")
   .then(() => {
