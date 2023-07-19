@@ -9,9 +9,9 @@ interface IUser {
 }
 
 export interface IUsers {
-    _id: number | string;
+    _id?: number | string;
     name?: string;
-    email: string;
+    email?: string;
     password?: string;
     confirmPassword?: string;
 }
