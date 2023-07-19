@@ -6,12 +6,11 @@ import mongoose from "mongoose";
 import RouterCategories from "./routes/category";
 import authRouter from './routes/auth';
 import RouterProducts from "./routes/product";
+import productRouter from "./routes/product";
 
 // Config
 dotenv.config();
-
 const app = express();
-
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -19,6 +18,7 @@ app.use(morgan("tiny"));
 // connect
 app.use("/api", RouterCategories);
 app.use("/api", authRouter);
+app.use("/api", productRouter)
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/nodejs-React")

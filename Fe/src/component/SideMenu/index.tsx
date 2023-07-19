@@ -33,7 +33,7 @@ function SideMenu() {
                     },
                     {
                         label: 'User',
-                        key: '/admin/user',
+                        key: '/admin/users',
                         icon: <UserOutlined />,
                     },
                     {

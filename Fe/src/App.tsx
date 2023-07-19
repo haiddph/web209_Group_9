@@ -7,6 +7,10 @@ import UpdateProduct from './pages/admin/product/UpdateProduct'
 import { getAllProduct, deleteProduct, updateProduct, addProduct } from './api/product'
 import "./App.css"
 import { ICategory, IProduct, IUser } from './types/product'
+import AddUser from './pages/admin/users/AddUser'
+import { IUsers, addUsers } from './api/user'
+import ListUser from './pages/admin/users/listUser'
+// import { addUser } from './api/auth'
 
 // import ProductCategory from './pages/admin/product/ProductCategory';
 
@@ -16,6 +20,9 @@ function App() {
   const [Products, setProducts] = useState<IProduct[]>([])
   const [Categories, setCategories] = useState<ICategory[]>([])
   const [productsByCategory, setProductsByCategory] = useState<{ [categoryId: string | number]: IProduct[] }>({});
+  const [Users, setUsers] = useState<IUsers[]>([])
+  
+
   //Products
   useEffect(() => {
     getAllProduct().then(({ data: { products } }) => setProducts(products.data))
@@ -33,6 +40,22 @@ function App() {
   const onhandleUpdate = (products: any) => {
     updateProduct(products).then(() => setProducts(Products.map((item: any) => item.id == products._id ? products : item)))
   }
+
+  // const addUser = (users: any) => {
+  //   addUser(users).then(() => setUsers([...users, users.data]))
+  // };
+
+  // user
+  const addUser = (users: any) => {
+    console.log("users",Users)
+    addUsers(users).then(() => setProducts([...Users, users.data]))
+    console.log("them tai khoan thanh cong")
+  };
+  useEffect(() => {
+    getAllProduct().then(({ data: { products } }) => setProducts(products.data))
+  }, [])
+    
+
   // const onhandlegetbyidCategory = (products: any) => {
   //   getAllProduct(categoryId).then(())
   // }
@@ -60,7 +83,6 @@ function App() {
   // productGetbyCategoryId
 
 
-
   return (
     <div className="App">
       <Routes>
@@ -71,8 +93,8 @@ function App() {
             <Route path=':_id' element={<ProductDetail />} />
           </Route> */}
 
-          {/* <Route path='signin' element={<Signin onSignin={onHandleSignIn} />} />
-          <Route path='signup' element={<Signup onAddUser={onHandleAddUser} />} /> */}
+          {/* <Route path='signin' element={<Signin onSignin={onHandleSignIn} />} /> */}
+          <Route path='signup' element={<AddUser onAddUser = {addUser} />} />
         </Route>
         <Route path='admin'>
           <Route index element={<Dashboard />} />
@@ -82,14 +104,9 @@ function App() {
             {/* <Route path=':_id/category' element={<ProductCategory products={Products} />} /> */}
             <Route path=':_id/update' element={<UpdateProduct products={Products} onUpdate={onhandleUpdate} />}></Route>
           </Route>Products
-        </Route>
-        <Route path='admin'>
-          <Route index element={<Dashboard />} />
-          {/* <Route path='category'>
-            <Route index element={<ListCategory onDelete={onhandleDeleteCategory} categories={Categories} />} />
-            <Route path='add' element={<AddCategory onAddCategory={onHandleAddCategory} />} />
-            <Route path=':_id/update' element={<UpdateCategory />}></Route>
-          </Route> */}
+          <Route path='users'>
+          <Route index element={<ListUser users={Users} />} />
+          </Route>Users
         </Route>
 
       </Routes>

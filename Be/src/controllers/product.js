@@ -55,6 +55,8 @@ export const create = async(req, res) => {
     try {
         // validate
         const { error } = productSchema.validate(req.body);
+        console.log("body",req.body)
+
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message,
@@ -75,7 +77,7 @@ export const create = async(req, res) => {
         });
     } catch (error) {
         return res.status(400).json({
-            message: error.message,
+            message: "loi",
         });
     }
 };

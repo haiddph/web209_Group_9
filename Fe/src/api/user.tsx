@@ -12,9 +12,10 @@ export interface IUsers {
     _id: number | string;
     name?: string;
     email: string;
-    password?: string
+    password?: string;
+    confirmPassword?: string;
 }
-export const addUser = (users: IUser) => {
+export const addUsers = (users: IUser) => {
     return instance.post("/signup", users)
 }
 
